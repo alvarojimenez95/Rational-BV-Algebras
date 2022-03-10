@@ -1,0 +1,606 @@
+\documentclass[handout,pdf]{beamer}
+\usepackage[utf8]{inputenc}
+
+
+\usefonttheme{professionalfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{dirtytalk}
+\usepackage{graphicx} 
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\newcommand{\longsquiggly}{\xymatrix{{}\ar@{~>}[r]&{}}}
+
+\usepackage{mathptmx}
+
+\usepackage{thmtools}
+%Enumerar
+\usepackage{enumerate}
+
+%solves align issue with pause
+\makeatletter
+\let\save@measuring@true\measuring@true
+\def\measuring@true{%
+  \save@measuring@true
+  \def\beamer@sortzero##1{\beamer@ifnextcharospec{\beamer@sortzeroread{##1}}{}}%
+  \def\beamer@sortzeroread##1<##2>{}%
+  \def\beamer@finalnospec{}%
+}
+
+
+\usepackage{pst-node}
+
+
+%Commands 
+\newcommand{\im}{\mathrm{im}\,}
+\newcommand{\dif}{\mathrm{d}}
+\usetikzlibrary{calc, intersections}
+\newcommand{\modul}{\; \mathrm{mod}\;}
+\newcommand{\Hom}{\mathrm{Hom}}
+\newcommand{\acal}{\mathcal{A}}
+\newcommand{\divergence}{\mathrm{div} \,}
+\newcommand{\bcal}{\mathcal{B}}
+\newcommand{\coker}{\mathrm{coker}\,}
+\newcommand{\pfrak}{\mathfrak{p}}
+\newcommand{\spec}{\mathrm{Spec}\,}
+\newcommand{\fcal}{\mathscr{F}}
+\newcommand{\ocal}{\mathscr{O}}
+\newcommand{\hcal}{\mathscr{H}}
+\newcommand{\tcal}{\mathcal{T}}
+\newcommand{\gcal}{\mathscr{G}}
+\newcommand{\cl}{\mathrm{cl}}
+\newcommand{\ucal}{\mathcal{U}}
+\newcommand{\mcal}{\mathcal{M}}
+\newcommand{\ical}{\mathcal{I}}
+\newcommand{\res}{\mathrm{res}}
+\newcommand{\continuous}{\mathrm{C}}
+\newcommand{\ccal}{\mathcal{C}}
+\newcommand{\obj}{\mathrm{Obj}}
+\newcommand{\mor}{\mathrm{Mor}}
+\newcommand{\oposite}{\ccal^{\mathrm{op}}}
+\newcommand{\dcal}{\mathcal{D}}
+\newcommand{\sets}{\mathbf{Set}}
+\newcommand{\cat}{\mathbf{Cat}}
+\newcommand{\ecal}{\mathcal{E}}
+\newcommand{\jcal}{\mathscr{J}}
+\newcommand{\group}{\mathbf{Group}}
+\newcommand{\wcal}{\mathcal{W}}
+\newcommand{\ring}{\mathbf{Ring}}
+\newcommand{\topo}{\mathbf{Top}}
+\newcommand{\vecto}{\mathbf{Vect}}
+\newcommand{\mfrak}{\mathfrak{m}}
+\newcommand{\ide}{\mathrm{id}}
+\newcommand{\fun}{\mathbf{Fun}}
+\newcommand{\vcal}{\mathcal{V}}
+\newcommand{\pcal}{\mathcal{P}}
+\newcommand{\lcal}{\mathscr{L}}
+\newcommand{\colim}{\mathop{\mathrm{colim}}\limits}
+\newcommand{\nerve}{\mathrm{N}}
+\newcommand{\spt}{\mathrm{spt \, }}
+\newcommand{\conj}{\overline{z}}
+
+\newcommand{\derived}{\mathrm{D}}
+\newcommand{\rcal}{\mathcal{R}}
+\newcommand{\kcal}{\mathcal{K}}
+\newcommand{\homcal}{\textit{Hom}}
+\newcommand{\ext}{\mathrm{Ext}}
+%\DeclareMathOperator{\lan}{Lan}
+%\DeclareMathOperator{\ran}{Ran}
+%\DeclareMathOperator{\tor}{Tor}
+%\DeclareMathOperator{\kom}{Kom}
+%\DeclareMathOperator{\pder}{PDer}
+%\DeclareMathOperator{\der}{Der}
+\newcommand{\cone}{\mathsf{C}}
+
+\usepackage[mathcal]{eucal}
+
+%indice
+\usepackage{makeidx}
+\makeindex
+
+
+%number of frames
+\setbeamertemplate{footline}[frame number]{}
+
+%Fuente
+\usepackage{mathptmx}
+
+\usepackage{csquotes}
+
+%Diagramas
+\usepackage[all]{xy}
+\usepackage{tikz}
+\usetikzlibrary{patterns, positioning, arrows}
+
+%Teoremas, Definiciones y demás
+\theoremstyle{plain}
+\newtheorem{thm}{Teorema}[section]
+\newtheorem{cor}[thm]{Corolario}
+\newtheorem{lema}[thm]{Lema}
+\newtheorem{prop}[thm]{Proposición}
+\newtheorem*{thm*}{Teorema}
+
+
+\theoremstyle{definition}
+\newtheorem{defi}[thm]{Definición}
+\newtheorem{ej}[thm]{Ejemplo}
+\newtheorem*{not*}{Notación}
+
+\usefonttheme[onlymath]{serif}
+
+\theoremstyle{remark}
+\newtheorem*{rem}{Observación}
+\newtheorem*{ej*}{Ejemplo}
+\newtheorem*{defi*}{Definición}
+
+
+%Tema
+\usetheme{Darmstadt}
+\usecolortheme{beaver}
+
+\title{Rational BV-Algebra In String Topology}
+\author[Álvaro Jiménez]{Álvaro Jiménez Calvo}
+\date{}
+
+%Secciones resaltadas e índice al principio de cada sección
+\AtBeginSection[]
+{
+  \begin{frame}
+    \frametitle{Índice}
+    \tableofcontents[currentsection]
+  \end{frame}
+}
+
+\setbeamertemplate{section in toc}[square]
+
+\setbeamerfont{section number projected}{size=\large}
+\setbeamercolor{section number projected}{bg=red!60!black,fg=white}
+
+\begin{document}
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+\begin{frame}
+\frametitle{Plan for the Talk}
+\tableofcontents[hideallsubsections]
+\end{frame}
+
+
+\section[]{Goals}
+
+\begin{frame}{Main Theorem}
+The goal of this talk is to prove the following statement: \pause 
+\begin{alertblock}{Theorem}
+If $M$ is $1$-connected and the field of coefficitnets has characteristic zero, then \pause 
+\begin{itemize}
+\setbeamercolor{item projected}{bg=red!60!black,fg=white}
+  \setbeamertemplate{enumerate items}[square]
+    \item there is a BV-structure on $HH^{\bullet}(C^{\bullet}(M), C^{\bullet}(M))$ extending the structure of a Gerstenhaber algebra, \pause 
+    \item there is an isomorphism of BV-algebras 
+    $$\mathbb{H}_{\bullet}(\text{L}M) \cong HH^{\bullet}(C^{\bullet}(M), C^{\bullet}(M)) \, .$$
+\end{itemize}
+\end{alertblock}
+\end{frame}
+
+
+
+
+\begin{frame}{Notation I}
+All manifolds are assumed to be smooth orientable, closed, with $\dim(M) = m$. \\\pause 
+\vspace{0.75cm}
+
+Denote by 
+$$\text{L}M = \text{Map}(\mathbb{S}^1, M)$$
+the \textit{loop space of $M$}. \pause Its \textit{shifted homology} will be denoted by 
+$$\mathbb{H}_{\bullet}(\text{L}M) = H_{\bullet + m}(\text{L}M) \, .$$
+\vspace{0.5cm}
+
+$C_{\bullet}(M)$ and $C^{\bullet}(M)$ denote the singular chains and cochains of $M$. \pause 
+\vspace{0.5cm}
+
+Convention: \pause complexes will have cohomological degree $V^i = V_{-i}$. 
+\end{frame}
+
+\vspace{0.5cm}
+
+
+\begin{frame}{Notation II}
+$A$ will denote a DG-algebra, \pause $s A$ denotes the \say{shift by $1$}, i.e. 
+$$(sA)^i = A^{i+1} \, ,$$
+\pause and $T(A)$ denotes the \textit{tensor coalgebra} 
+$$T(A) = \bigoplus_{i = 0}(sA)^{\otimes i}\, .$$
+\end{frame}
+
+\section[]{Motivation}
+
+\begin{frame}{Motivation}
+
+Assume the coefficients ring is a field. \pause Jones \cite{jones} showed there is a linear isomorphism
+$$HH_{\bullet}(C^{\bullet}(M), C^{\bullet}(M)) \cong H^{\bullet}(\text{L}M) \, .$$\pause
+
+\vspace{0.5cm}
+By duality, $H_{\bullet}(\text{L}M) \cong HH^{\bullet}(C^{\bullet}(M) , C_{\bullet}(M))$. \pause 
+
+\vspace{0.5cm}
+
+Next, the cap product induces an isomorphism of graded vector spaces \pause 
+$$HH^{\bullet}(C^{\bullet}(M), C_{\bullet}(M)) \cong HH^{\bullet - m}(C^{\bullet}(M), C^{\bullet}(M)) \, ,$$
+\pause and therefore an isomorphism 
+$$\mathbb{H}_{\bullet}(\text{L}M) \cong HH^{\bullet}(C^{\bullet}(M), C^{\bullet}(M)) \, .$$
+
+\end{frame}
+
+\begin{frame}{Motivation (II)}
+On the other hand, Lambrechts and Stanley (\cite{stanley}) showed the following: \pause 
+\begin{alertblock}{Theorem}
+There exists a commutative differential graded algebra $A$ satisfying: \pause 
+\begin{itemize}
+\setbeamercolor{item projected}{bg=red!60!black,fg=white}
+  \setbeamertemplate{enumerate items}[square]
+    \item $A$ is quasi-isomorphic to the DG-algebra $C^{\bullet}(M)$.\pause 
+    \item $A$ is connected, finite dimensional and satisfies Poincaré duality in dimension $m$ (i.e. there is an $A$-linear isomorphism $\theta \colon A \to A^{\lor}$ commuting with the differentials. 
+\end{itemize}
+\end{alertblock}
+\pause 
+\vspace{0.5cm}
+
+$A$ will be referred to as a \textit{Poincaré duality model for $M$}.
+\end{frame}
+
+\begin{frame}{Idea of Proof}
+Using the result of Lambrechts and Stanley, we first replace $C^{\bullet}(M)$ by its quasi-isomorphic DG-algebra $A$. \pause 
+
+\vspace{0.5cm}
+
+By a result in \cite{gerstenhaber} there is an isomorphism of Gerstenhaber algebras \pause 
+$$HH^{\bullet}(A,A) \cong HH^{\bullet}(C^{\bullet}(M), C^{\bullet})) \, .$$
+\pause 
+
+\vspace{0.5cm}
+
+Then, show that $HH_{\bullet}(A,A) \cong H^{\bullet}(\text{L}M)$ as an isomorphism of graded vector spaces. \pause 
+\vspace{0.5cm}
+\end{frame}
+\begin{frame}{Idea of Proof (II)}
+By the result of Menichi, the dual of Connes' operator $B^{\lor}$ on $HH^{\bullet+1}(A, A)^{\lor}$ gets transfered via the duality isomorphism 
+$$\theta \colon HH_{\bullet}(A,A)^{\lor} \cong HH^{\bullet}(A,A^{\lor}) \xrightarrow{\simeq} HH^{\bullet}(A,A)$$
+to a BV-algebra structure on $HH^{\bullet}(A,A)$ extending the Gerstenhaber algebra structure.
+\vspace{0.5cm}
+
+Finally, show that the isomorphism $HH_{\bullet}(A,A) \cong H^{\bullet}(\text{L}M)$ transfers Connes' operator $B$ to the operator $\Delta'$ induced by the action of $\mathbb{S}^1$ on $\text{L}M$ 
+\end{frame}
+
+
+\section[]{Hochschild complexes}
+\begin{frame}{Hochschild (co)homology: Bar construction I}
+Fix a DG-algebra $A$, a right $A$-module $P$ and a left $A$-module $N$. \pause 
+
+\vspace{0.5cm}
+
+Denote by $\text{Bar}(P,A,N)$ the following (two-sided) complex, \pause 
+$$\text{Bar}_k(P,A,N)^l = (P \otimes T^k(A) \otimes N)^l \, .$$ 
+\vspace{0.5cm}
+Here, $k$ is the \textit{lower degree}. Given an element $p[a_1\mid a_2 \mid \cdots \mid a_k] n$ in $\text{Bar}_k(P,A,N)$, we will say it has \textit{upper degree} 
+$$l = |p| + |n| + \sum_{i=1}^k |sa_i| \, .$$
+\end{frame}
+
+\begin{frame}{Hochschild (co)homology: Bar construction II}
+We equip $\text{Bar}(P, A, N)$ with the differential $b_{\text{Bar}} = \partial_{DG} + \partial_{\text{Bar}}$: \pause 
+\begin{align*}
+\partial_{DG}(p[a_1 \mid \cdots \mid a_k] n) &= d(p)[a_1 \mid \cdots \mid a_k]n\\
+& \quad - \sum_{i=1}^k (-1)^{\text{sign}_i} p[a_1 \mid \cdots \mid d(a_i)\mid \cdots \mid a_k] n \\
+& \quad + (-1)^{\text{sign}_{k+1}}p[a_1 \mid \cdots \mid a_k]d(n) \, .
+\end{align*}
+\begin{align*}
+\partial_{\text{Bar}}(p[a_1 \mid \cdots \mid a_k] n) & = (-1)^{|p|}p a_1[a_2 \mid \cdots \mid a_k] n \\
+& \quad + \sum_{i=2}^k (-1)^{\text{sign}_i}p[a_1 \mid \cdots \mid |a_{i-1}a_i \mid \cdots \mid a_k] n \\
+& \quad - (-1)^{\text{sign}_k} p[a_1 \mid \cdots \mid a_{k-1}] a_k n\, .
+\end{align*} \pause 
+Here, $\text{sign}_i$ denotes $|p|+ \sum_{j<i} |sa_j|$. 
+\end{frame}
+
+
+\begin{frame}{Hochschild (co)homology}
+Let $A^e = A \otimes A^{\text{op}}$ and $P$ a DG right $A^e$-module. Define \pause 
+$$C_{\bullet}(P,A) = P \otimes_{A^e} \text{Bar}(A,A,A) \, .$$\pause 
+\vspace{0.5cm}
+The complex $C_{\bullet}(P,A)$ is called the \textit{Hochschild chain complex of $A$ with coefficients in $P$}. Its homology is called the \textit{Hochschild homology of $A$ with coefficients in $P$}. \pause We denote it by $HH_{\bullet}(A,P)$.
+
+\vspace{0.5cm}
+
+Similarly, define for a left DG $A^e$-module $N$\pause 
+$$C^{\bullet}(A, N) = \Hom_{A^e}(\text{Bar}(A,A,A), N) \, .$$
+$C^{\bullet}(A,N)$ is the \textit{Hochschild cochain complex of $A$ with coefficients in $N$}. Its cohomology is called the \textit{Hochschild cohomology of $A$ with coefficients in $N$}. \pause We denote it by $HH^{\bullet}(N,A)$.
+\end{frame}
+
+
+\section[]{Gerstenhaber and BV-algebras}
+
+\begin{frame}{Gerstenhaber algebras}
+Recall that a \textit{Gerstenhaber algebra structure} on a commutative graded algebra $H = \{H_i\}_{i \in \mathbb{Z}}$ is given by a (Gerstenhaber) bracket 
+$$[-,-] \colon H_i \otimes H_j \to H_{i+j +1} \, , \; x \otimes y \mapsto [x, y] \;\; .$$\pause
+The bracket $[-,-]$ satisfies, for all $h, h', h'' \in H$: \pause 
+\begin{itemize}
+\setbeamercolor{item projected}{bg=red!60!black,fg=white}
+  \setbeamertemplate{enumerate items}[square]
+  \item $[h,h'] = (-1)^{(|h|-1)(|h'|-1)}[h', h]$, \pause 
+  \item $[h, [h', h'']] = [[h,h'], h''] + (-1)^{(|a|-1)(|a'|-1)}[h', [h,h'']]$. 
+\end{itemize}\pause 
+
+\vspace{0.5cm}
+Hochschild cohomology becomes a Gerstenhaber algebra via: \pause 
+\begin{itemize}
+\setbeamercolor{item projected}{bg=red!60!black,fg=white}
+  \setbeamertemplate{enumerate items}[square]
+  \item Cup product \pause (this gives graded commutativity),\pause 
+  \item Gerstenhaber bracket: \pause circle product of Hochschild cochains.
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{BV-algebras}
+\pause Recall that a \textit{Batalin-Vilkovisky algebra} (BV-algebra) is a commutative graded algebra $H$ together with a linear map of degree $-1$ (BV-operator) \pause 
+$$\Delta \colon H^k \to H^{k-1}$$
+such that:\pause 
+\begin{itemize}
+    \setbeamercolor{item projected}{bg=red!60!black,fg=white}
+  \setbeamertemplate{enumerate items}[square]
+  \item $\Delta^2 = 0$, \pause
+  \item $H$ becomes a Gerstenhaber algebra with bracket 
+  $$[h,h'] = (-1)^{|h|}(\Delta(hh') - (-1)^{|h|}\Delta(h)h' - h\Delta(h') + h\Delta(1)h' \, .$$
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Connes' $B$ operator I}
+The Hochschild complex carries a natural cyclic action induced by the cyclic bar construction. \pause 
+\vspace{0.5cm}
+
+Connes' $B$ operator is a degree $-1$ homogeneous map on Hocshchild chains that takes this action into account. \pause 
+
+\vspace{0.5cm}
+
+For a a general element $a_0 \otimes [a_1 \mid \cdots \mid a_n]$, one has \pause 
+$$B(a_0\otimes [a_1 \mid \cdots \mid a_n]) = \sum_{i=0}^n (-1)^{\text{sign'}_i}1 \otimes [a_i \mid \cdots \mid a_n \mid a_0 \mid \cdots \mid a_{i-1}], ,$$
+\pause where 
+$$\text{sign'}_i = (|sa_0| + |sa_1| + \cdots + |sa_{i-1}|)(|sa_i| + \cdots + |sa_n|) \, .$$
+\end{frame}
+
+\section[]{BV-algebra structure on Hochschild cohomology}
+\begin{frame}{Connes' $B$ operator II}
+The Hochschild complex $C_{\bullet}(A)$ together with the operators $b$ and $B$ form a \textit{mixed complex} \pause ($B^2 = 0, B \circ b + b \circ B = 0$). \pause 
+\vspace{0.5cm}
+
+Its homology is known as the \textit{cyclic homology of $A$}, and it is denoted by $HC_{\bullet}(A)$. 
+\end{frame}
+
+
+\begin{frame}{BV-Structure in Hochschild cohomology}
+Recall that $HH^{\bullet}(A)$ is a Gerstenhaber algebra where: \pause 
+\begin{itemize}
+\setbeamercolor{item projected}{bg=red!60!black,fg=white}
+  \setbeamertemplate{enumerate items}[square]
+    \item Graded commutativity comes from the cup product, \pause 
+    \item Gerstenhaber algebra comes from circle product. 
+\end{itemize}
+\pause 
+\vspace{0.5cm}
+
+By duality, Connes' operator $B$ induces a map in cohomology
+$$\overline{B} \colon HH^{n+1}(A) \to HH^n(A)\, .$$
+\pause 
+Here, $HH^{\bullet}(A) = HH^{\bullet}(A, A^{\lor})$.  \pause 
+$$\overline{B}([f])([a_1 \otimes \cdots \otimes a_n])(a_0) = \sum_{i=0}^n \pm f(a_i \otimes \cdots \otimes a_n \otimes a_0 \otimes \cdots \otimes a_{i-1})(1) \, .$$\pause 
+\begin{alertblock}{BV-algebra structure on Hochschild cohomology}
+Hochschild cohomology with the dual of Connes' operator, $\overline{B}$, is a BV-algebra. 
+\end{alertblock}
+\end{frame}
+
+\begin{frame}{Remarks}
+The BV-algebra structure constructed above works more generally in the \textit{ungraded case}. \pause 
+\vspace{0.5cm}
+
+However, for our purposes, as we want to compare $HH^{\bullet}(C^{\bullet}, C^{\bullet})$ with the homology of the loop space, we quote the following result by L. Menichi (\cite{menichi})
+\begin{alertblock}{Theorem}
+The dual of Connes' operator $B$ together with the cup product induce a BV-algebra structure on Hochschild cohomology $H^{\bullet}(C^{\bullet}, C^{\bullet})$.
+\end{alertblock}
+\end{frame}
+
+\section[]{BV-algebra structure on Loop Homology}
+\begin{frame}{Chas-Sullivan Product}
+Recall from previous talks, we have a loop product \pause
+$$-\bullet - \colon LM \times LM \to LM\, .$$
+\pause 
+using the notion of \textit{transversal geometric chains}. \pause
+\vspace{0.5cm}
+
+Moreover, the circle action \pause 
+$$\rho \colon \mathbb{S}^1 \times \text{L}M \to \text{L}M \; \; \rho(s, \alpha)(t) = \alpha(s+t)$$\pause
+defines an operator $\Delta$ of degree $1$ commuting with the differential. \pause 
+\vspace{0.5cm}
+We have seen the following: \pause 
+\begin{alertblock}{BV-structure on $\mathbb{H}_{\bullet}(\text{LM})$}
+The loop product $\bullet$ together with the operator $\Delta$ define a BV-algebra structure on the loop homology $\mathbb{H}^{\bullet}(\text{L}M)$. 
+\end{alertblock}
+\end{frame}
+
+
+\begin{frame}[fragile]{Chas-Sullivan Product (Dual)}
+\pause We are interested in the \textit{dual} of the loop product $\bullet$. \pause Consider the diagram \pause 
+\begin{equation*}
+    \begin{tikzcd}
+    \text{L}M^{\times 2} \arrow[d, "{(p_0, p_0}"] & \text{L}M \times_M \text{L}M \arrow[l, swap, "i"] \arrow[d, "p_0"] \arrow[r, "\text{Comp}"] & \text{L}M \arrow[d, "p_0"]\\
+    M^{\times 2} & M \arrow[l, "\text{diag}"] \arrow[r, equal] & M
+    \end{tikzcd}
+\end{equation*}
+\pause 
+\vspace{0.5cm}
+By Poincaré duality, given $f \colon E \to M$, we can construct the \textit{Gysin homomorphism} via the commutative diagram\pause 
+\begin{equation*}
+    \begin{tikzcd}
+    H^k(E) \arrow[r, "f_*"] \arrow[d, "\text{P.D.}"] & H^{k - (e-m)}(M) \arrow[d, "\text{P.D.}"] \\
+    H_{e-k}(E) \arrow[r, "f_*"] & H_{e-k}(M) 
+    \end{tikzcd}
+\end{equation*}
+\pause 
+where $e = \dim(E), m = \dim(M)$. 
+\end{frame}
+
+\begin{frame}[fragile]{Chas-Sullivan Product (Dual) II}
+Taking $\text{diag} \colon M \to M \times M$ and $i \colon \text{L}M\times_M \text{L}M$, we obtain the Gysin maps\pause 
+$$\text{diag}^! \colon H^k(M) \to H^{k+m}(M^{\times 2})\, ,\;\; i^{!} \colon H^k(\text{L}M \times_M \text{L}M) \to H^{k+m}(\text{L}M^{\times 2}) \, .$$
+
+\vspace{0.5cm}
+We obtain the following commutative diagram\pause 
+\begin{equation*}
+    \begin{tikzcd}
+    H^{k+m}(\text{L}M^{\times 2}) & H^k(\text{L}M \times_M \text{L}M) \arrow[l, swap, "i^!"] & H^k(\text{L}M) \arrow[l, swap, "H^k(\text{Comp})"]\\
+    H^{k+m}(M^{\times 2}\arrow[u, "H^*(p_0)^{\times 2}"] & H^k(M)\arrow[u, "{H^*(p_0)}"] \arrow[l, swap, "\text{diag}^!"]\arrow[r, equal] & H^k(M) \arrow[u, "H^*(p_0)"]
+    \end{tikzcd}
+\end{equation*}
+\pause 
+Define the \textit{dual of the loop product} as the composition 
+
+$$i^! \circ H^{\bullet}(\text{Comp}) \colon H^*(\text{L}M) \to H^{\bullet+m}(\text{L}M^{\times 2}) \, .$$
+\end{frame}
+
+
+\begin{frame}{Remarks}
+The construction of the dual loop product is not quite like that. \pause 
+
+\vspace{0.5cm}
+
+We need the notion of \textit{Thom spaces} and the \textit{Thom-Pontryagin construction}. \pause More concretely, the square formed by the maps $i$ and $\text{diag}$ is a pullback square which allows for a Thom-Pontryagin map 
+$$\text{L}M \times \text{L}M \to (\text{L}M \times_M \text{L}M)^{TM}\, .$$ \pause 
+
+\vspace{0.5cm}
+
+Then, one argues in a similar fashion to define the dual of the loop product as before. 
+\end{frame}
+
+\section[]{Proof of Main Theorem}
+
+\begin{frame}[fragile]{$C_{\bullet}(A,A)$ is a model of $\text{L}M$}
+\pause
+\begin{alertblock}{Proposition}
+We have an isomorphism of graded vector spaces $HH_{\bullet}(A,A) \cong H^{\bullet}(\text{L}M)$. \pause The composite 
+\begin{equation*}
+    \begin{tikzcd}
+    C_{\bullet}(A,A) \arrow[r] \arrow[d, equal] & C_{\bullet}(A,A) \otimes_A C_{\bullet}(A,A) \\
+    A \otimes T(A) \arrow[r, "\ide \otimes \phi"] & A \otimes T(A) \otimes T(A) \arrow[u, "\simeq"]
+    \end{tikzcd}
+\end{equation*}
+is a model of the composition of free loops. 
+\end{alertblock}
+\end{frame}
+
+\begin{frame}[fragile]{Sketch of Proof}
+Consider the diagram \pause
+\begin{equation}
+\label{comp}
+    \begin{tikzcd}
+	& {\text{L}M \times_M \text{L}M} &&& {M^I \times_M M^I} \\
+	{\text{L}M} & {} & {} & {M^I} & {} \\
+	& M && {} & {M^{\times3}} \\
+	M &&& {M^{\times 2}}
+	\arrow["{\text{Comp}}"', from=1-2, to=2-1]
+	\arrow["{\text{Comp}^I}", from=1-5, to=2-4]
+	\arrow["j", from=1-2, to=1-5]
+	\arrow["j", from=2-1, to=2-4]
+	\arrow["{(\text{id} \times \Delta) \circ \Delta}", from=3-2, to=3-5]
+	\arrow["{p_0}"', from=2-1, to=4-1]
+	\arrow["{(p_0,p_0,p_0)}"{pos=0.7}, shift left=2, from=1-5, to=3-5]
+	\arrow["{\text{pr}}"', from=3-5, to=4-4]
+	\arrow["\Delta"', from=4-1, to=4-4]
+	\arrow[Rightarrow, no head, from=3-2, to=4-1]
+	\arrow[from=2-4, to=4-4]
+	\arrow["{p_0}"'{pos=0.6}, dashed, from=1-2, to=3-2]
+    \end{tikzcd}
+\end{equation}
+\pause where $\text{Comp}^I$ denotes composition of paths, $\Delta$ the diagonal and $p_0$ denotes evaluation at $p_0 \in M$. \pause  
+\end{frame}
+
+\begin{frame}[fragile]{Sketch of Proof (II)}
+Let $(A, d)$ be a commutative DG-algebra quasi-isomorphic to $C^{\bullet}(M)$. Consider 
+\begin{equation}
+\label{comp_right}
+    \begin{tikzcd}
+    \text{Bar}(A,A,A) \arrow[r, "\Psi"] & \text{Bar}(A,A,A) \otimes_A \text{Bar}(A,A,A) \\
+    A^{\otimes 2} \arrow[r, "\psi"]\arrow[u] & A^{\otimes 3} \arrow[u]
+    \end{tikzcd}
+\end{equation}
+\pause where 
+$$\Psi(a \otimes [a_1 \mid \cdots \mid a_k] a') = \sum_{i=0}^k a \otimes [a_1 \mid \cdots \mid a_i] \otimes 1 \otimes [a_{i+1} \mid \cdots \mid a_k] \otimes a' \, ,$$
+and \pause 
+$$\psi(a \otimes a') = a \otimes 1 \otimes a' \, .$$
+\pause Diagram \eqref{comp_right} is a cochain model of the right hand square in \eqref{comp}.
+\end{frame}
+
+\begin{frame}[fragile]{Sketch of Proof (III)}
+    Tensoring by $A$ diagram \eqref{comp_right}, we obtain \pause 
+    \begin{equation}
+    \label{comp_left}
+        \begin{tikzcd}
+        A \otimes_{A^{\otimes 2}} \text{Bar}(A,A,A) \arrow[r, "\ide \otimes \Psi"]& A \otimes_{A^{\otimes 3}} (\text{Bar}(A,A,A) \otimes_A \text{Bar}(A,A,A)) \\
+        A \otimes_{A^{\otimes 2}} A^{\otimes 2} \arrow[u] \arrow[r, "\ide \otimes \psi"]& A \otimes_{A^{\otimes 3}} A^{\otimes 3} \arrow[u]
+        \end{tikzcd}
+    \end{equation}
+\pause Then, one realises that \eqref{comp_left} is actually a cochain model of the left hand square in \eqref{comp}. But we also have 
+\begin{equation*}
+    \begin{tikzcd}
+    A \otimes_{A^{\otimes 2}} \text{Bar}(A,A,A) \arrow[r, "\ide \otimes \Psi"] & A \otimes_{A^{\otimes 3}} \text{Bar}(A,A,A) \otimes_A \text{Bar}(A,A,A) \\
+    A \otimes T(A) \arrow[u, "\simeq"] \arrow[r, "\ide \otimes \phi"] & A \otimes T(A) \otimes T(A) \arrow[u, "\simeq"]
+    \end{tikzcd}
+\end{equation*}
+\pause from which the Proposition follows. 
+\end{frame}
+
+
+\begin{frame}[fragile]
+Consider the following diagram \pause 
+\begin{equation}
+\label{diag_1}
+\begin{tikzcd}
+A^{\lor} \arrow[r, "\mu^{\lor}"] &(A \otimes A)^{\lor} = A^{\lor} \otimes A^{\lor} \\
+A  \arrow[u, "\theta"] \arrow[r, dotted, "\mu_A"] & A \otimes A \arrow[u, "\theta \otimes \theta"]
+\end{tikzcd}
+\end{equation}
+\pause Here, $\mu \colon A \otimes A \to A$ denotes multiplication of $A$, $\theta$ is the dual isomorphism, and $\mu_A$ is defined by the commutative diagram. \pause 
+
+\vspace{0.25cm}
+We have the following
+\begin{alertblock}{Lemma}
+The map $\mu_A$ represents the Gysin map $\text{diag}^!$ and the map of degree $m$ \pause 
+$$C_{\bullet}(A,A) \otimes_A C_{\bullet}(A,A) \xrightarrow{\simeq} A \otimes_{A^{\otimes 2}} C_{\bullet}(A,A)^{\otimes 2} \xrightarrow{\mu_A \otimes \ide} C_{\bullet}(A,A)^{\otimes 2}$$
+commutes with the differential and induces $i^!$ in homology.
+\end{alertblock}
+\end{frame}
+
+
+\begin{frame}[fragile]
+Define a map $\Phi$ via the diagram 
+\begin{equation}
+\label{diag_2}
+    \begin{tikzcd}
+    A \otimes T(A) \arrow[d, dotted, "\Phi"] \arrow[r, "\ide \otimes \phi"] & A \otimes T(A) \otimes T(A) \cong A \otimes_{A^{\otimes 2}} (A \otimes T(A))^{\otimes 2} \arrow[d, "\mu_A \otimes \ide"] \\
+    (A \otimes T(A))^{\otimes 2} & A^{\otimes 2} \otimes_{A^{\otimes 2}}(A \otimes T(A))^{\otimes 2} \arrow[l, "\simeq"]
+    \end{tikzcd}
+\end{equation}
+
+\pause 
+\vspace{0.5cm}
+We have the following \pause 
+\vspace{0.5cm}
+\begin{alertblock}{Theorem}
+The isomorphism $HH_{\bullet + m}(A,A)^{\lor} \cong HH^{\bullet + m}(A, A^{\lor}) \cong HH^{\bullet}(A,A)$ transfers $\Phi_*$ to the Gerstenhaber product on $HH^{\bullet}(A,A)$. 
+\end{alertblock}
+\end{frame}
+
+\begin{frame}{References}
+   \nocite{*}
+   \bibliographystyle{plain}
+   \bibliography{bibliography}
+ \end{frame}
+\end{document}
